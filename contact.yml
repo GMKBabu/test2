@@ -1,0 +1,14 @@
+---
+- hosts: all
+  vars:
+    users:
+      babu: 
+         name: "GMK Babu" 
+         telephone: "+91-9949900264"
+      gbk: 
+         name: "Boyez Kumar" 
+         telephone: "+91-7093105042"
+  tasks:
+    - name: print the contact
+      debug: msg="User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"
+      with_dict: "{{ users }}" 

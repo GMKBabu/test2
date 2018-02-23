@@ -1,0 +1,16 @@
+---
+- hosts: all
+  remote_user: gmkbabu
+  become: yes
+  tasks:
+    - name: show hostvars[inventory_hostname]
+      debug: var=hostvars[inventory_hostname]
+    - name: show the ansible_ssh_host variable in hostvars
+      debug: var=hostvars[inventory_hostname].ansible_ssh_host
+    - name: show the group_names
+      debug: var=group_names
+    - name: show the groups
+      debug: var=groups
+   
+    - set_fact: headnode={{ groups[['web'][0]] }}
+    - debug: var={{ hostvars[headnode].ansible_eth0.ipv4.address }}

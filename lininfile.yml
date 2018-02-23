@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+     - name: set the java
+       lineinfile: dest=/home/gmkbabu/hell.txt regexp='<JAVA_HOME>'
+                   line='export java_home=/usr/lib'
+     - name: sjgds
+       lineinfile: dest=/home/gmkbabu/hell.txt regexp='<JAVA_HOME>'
+                   line='export PATH="$PATH:$JAVA_HOME/bin"'

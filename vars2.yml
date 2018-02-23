@@ -1,0 +1,6 @@
+---
+- hosts: all
+  remote_user: gmkbabu
+  become: yes
+  vars:
+    local_home: "{{ lookup('env', "HOME") }}"

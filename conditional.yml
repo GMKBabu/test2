@@ -1,0 +1,9 @@
+- name: this is a play
+  hosts: all 
+  remote_user: gmkbabu
+  become: sudo
+  tasks:
+    - name: install the apache
+      yum: name=httpd state=installed
+      when: ansible_os_family == "RedHat"
+ 

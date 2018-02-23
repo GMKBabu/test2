@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+   - name: copy the custom policy when exist
+     template: src="{{ item }}" dest=/home/gmkbabu/bab.txt
+     with_first_found:
+        - files:
+            - hell.txt
+            - he.txt
+            - /home/gmkbabu/b.txt
+          skip: True 

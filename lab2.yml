@@ -1,0 +1,32 @@
+---
+- name: lab2-all server setup
+  hosts: all
+  remote_user: gmkbabu
+  become: yes
+  vars: 
+    selinux: permissive
+  tasks:
+    - name: configure the selinux file
+      selinux: policy=targeted state="{{ selinux }}"
+- name: install the httpd server on web
+  hosts: web
+  become: yes
+  remote_user: gmkbabu
+  tasks:
+    - name: install the httpd
+      yum: name=httpd state=present
+    - name: copy the html file
+      copy: src=index.html dest=/var/www/html/
+      notify: restart the apache
+      
+    - name: set the root login permision on
+      lineinfile: dest=/etc/ssh/sshd_config
+                  line="PermitRootLogin on"
+                  state=present
+      notify: restart the sshd
+  handlers:
+     - name: restart the apache
+       service: name=httpd state=restarted
+     - name: restart the sshd
+       command: systemctl restart sshd.service
+       #service: name=sshd state=restarted enabled=yes 

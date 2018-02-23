@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - shell: /home/gmkbabu/smaple-playbooks/hell.txt
+      register: result
+      until: result.stdout.find("world")!= -1
+      retries: 5
+      delay: 10

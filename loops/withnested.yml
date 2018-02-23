@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+     - name: give users access to multiple database
+       mysql_user: 
+            name: "{{ item[0] }}"
+            priv: "{{ item[1] }}.*:ALL"
+            append_privs: yes
+            password: "foo"
+       with_nested:
+          - [ 'alice', 'bob' ]
+          - [ 'clientdb', 'employeedb', 'providerdb' ]

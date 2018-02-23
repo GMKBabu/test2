@@ -1,0 +1,6 @@
+---
+- name: print the contacts
+  debug:
+      msg: "User {{ item.key }} is {{ item.name }} ({{ item.telephone }})"
+  with_dict: "{{ users }}"
+

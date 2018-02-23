@@ -1,0 +1,20 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: install the some packages
+      yum: name="{{ item }}" state=present
+      with_items:
+          - libselinux-python
+          - epel-release
+          - httpd
+      tags: packages
+      notify: restart the apache
+    - name: copy the html file
+      copy: src=index.html dest=/var/www/html/
+      notify: restart the apache
+      tags: 
+         - configuration
+  handlers:
+      - name: restart the apache
+        service: name=httpd state=restarted

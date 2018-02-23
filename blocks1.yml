@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: sudo
+  tasks:
+     - block:
+         - name: install the httpd
+           yum: name=httpd state=present
+         - name: copy the html file
+           copy: src=index.html dest=/var/www/html/
+         - name: restart httpd
+           service: name=httpd state=restarted
+       when: ansible_distribution == "RedHat" 

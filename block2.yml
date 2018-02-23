@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: sudo
+  tasks: 
+     - block:
+         - name: install the httpd
+           yum: name=httpd1 state=present
+       rescue:
+         - name: install the httpd
+           yum: name=httpd state=present
+         - name: copy the html file
+           copy: src=index.html dest=/var/www/html/
+         - name: restart httpd
+           service: name=httpd state=restarted
+       always:
+         - debug: msg="please try agin"
+       when: ansible_distribution == "RedHat"
+

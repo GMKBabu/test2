@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: copy the directory
+      copy: src="{{ item }}" dest=/home/gmkbabu/ 
+      with_fileglob:
+          - "/home/gmkbabu/smaple-playbooks/hell*"
+    

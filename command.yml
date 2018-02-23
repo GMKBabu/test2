@@ -1,0 +1,13 @@
+---
+- hosts: all
+  remote_user: gmkbabu
+  become: yes
+  tasks:
+    - name: create dir
+      command: mkdir /home/gmkbabu/babu
+    - name: list 0f all files
+      shell: ls > /home/gmkbabu/list
+    - name: create the directory
+      raw: mkdir /home/gmkbabu/babu1
+    - name: execute the shell 
+      script: ./more.sh

@@ -1,0 +1,19 @@
+---
+- hosts: '{{ hosts }}'
+  remote_user: gmkbabu
+  become: yes
+  vars:
+    pkg1: epel-release
+  vars_files:
+       - pkg2.yml
+  vars_prompt:
+        - name: pkg3
+          prompt: enter the package name
+          private: no
+  tasks:
+    - name: install pkg1
+      yum: name={{ pkg1 }} state=present
+    - name: pkg2
+      yum: name={{ pkg2 }} state=present
+    - name: pkg3
+      yum: name={{ pkg3 }} state=present

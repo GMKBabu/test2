@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: gmkbabu
+  become: yes
+  tasks:
+    - name: test synchronize command
+      synchronize:
+         src: index.html
+         dest: rsyn:/home/gmkbabu/
